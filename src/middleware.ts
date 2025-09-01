@@ -77,5 +77,5 @@ export async function middleware() {
 
 export const config = {
   runtime: 'nodejs',
-  matcher: ['/api/banktowallet', '/api/user', '/api/wallettobank']
+  matcher: ['/api/banktowallet', '/api/user', '/api/wallettobank', '/api/peertopeer']
 }

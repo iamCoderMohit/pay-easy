@@ -17,7 +17,6 @@ export const authOptions = {
           placeholder: "your password",
         },
       },
-      //@ts-ignore
       async authorize(credentials: any) {
         try {
           const userExists = await prisma.user.findUnique({
@@ -66,4 +65,8 @@ export const authOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: "/signin",
+    newUser: "/signup"
+  }
 };

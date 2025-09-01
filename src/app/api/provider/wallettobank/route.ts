@@ -8,22 +8,26 @@ export async function POST(req: Request) {
     if (!body.userId || !body.amount) {
       return NextResponse.json(
         {
-          msg: "not enough details",
+          msg: "please provide valid details!!",
         },
         { status: 500 }
       );
     }
 
+
     const user = await prisma.user.findUnique({
       where: {
-        id: body.userId
-      }
-    })
+        id: body.userId,
+      },
+    });
 
-    if(!user){
-      return NextResponse.json({
-        msg: "user not found"
-      }, {status: 500})
+    if (!user) {
+      return NextResponse.json(
+        {
+          msg: "user not found",
+        },
+        { status: 404 }
+      );
     }
 
     const bank = await prisma.bank.findUnique({
@@ -35,28 +39,19 @@ export async function POST(req: Request) {
     if (!bank) {
       return NextResponse.json(
         {
-          msg: "this user doesn't have a bank ac.",
+          msg: "bank ac. not found",
         },
-        { status: 500 }
-      );
-    }
-
-    if (bank.balance < body.balance) {
-      return NextResponse.json(
-        {
-          msg: "not enough balance",
-        },
-        { status: 500 }
+        { status: 404 }
       );
     }
 
     const result = await prisma.bank.update({
       where: {
-        userId: body.userId,
+        userId: bank.userId,
       },
       data: {
         balance: {
-          decrement: body.amount,
+          increment: body.amount,
         },
       },
     });
@@ -64,7 +59,7 @@ export async function POST(req: Request) {
     if (!result) {
       return NextResponse.json(
         {
-          msg: "eror deducting money",
+          msg: "transaction failed",
         },
         { status: 500 }
       );
@@ -78,8 +73,11 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({
-      msg: "something unexpected happened",
-    });
+    return NextResponse.json(
+      {
+        msg: "something unexpected happened",
+      },
+      { status: 500 }
+    );
   }
 }

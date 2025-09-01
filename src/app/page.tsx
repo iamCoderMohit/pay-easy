@@ -1,32 +1,14 @@
-"use client"
+import { Background } from "@/components/Background";
+import Navbar from "@/components/Navbar";
 
-import AddMoneyToBank from "@/components/AddMoneyToBank";
-import AddMoneyToWallet from "@/components/AddMoneyToWallet";
-import axios from "axios";
-import { signIn, signOut, useSession } from "next-auth/react";
+export default function Page(){
+  return <div className="">
+    <Navbar />
+    <Background />
 
-export default function Home() {
-  const session = useSession()
-  return (
-    <>
-      <div>hello world</div>
-      <button onClick={() => signOut()}>log out</button>
-      <br />
-      <button onClick={() => signIn()}>signin</button>
-      <button className="bg-red-500 p-5"
-      onClick={async () => {
-        await axios.post(`http://localhost:3000/api/bank`)
-      }}
-      >Activate</button>
-      <button className="bg-green-500 p-5 ml-10"
-      onClick={async () => {
-        await axios.post(`http://localhost:3000/api/wallet`)
-      }}
-      >Activate wallet</button>
-      <div>{JSON.stringify(session)}</div>  
-
-      <AddMoneyToWallet />
-      <AddMoneyToBank />
-    </>
-  );
+    <div className="absolute z-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <h1 className="text-6xl text-center font-bold">Build, test, and simulate transactions</h1>
+      <h1 className="text-gray-600 text-xl text-center mt-5">A payment app simulator — build, test, and experience transactions just like in real-world money apps</h1>
+    </div>
+  </div>
 }

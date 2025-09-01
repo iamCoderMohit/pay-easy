@@ -23,7 +23,7 @@ export async function PUT(req: Request) {
       },
     });
 
-    const updatedUser = await prisma.user.updateMany({
+    const updatedUser = await prisma.user.update({
       where: {
         id: user!.id,
       },

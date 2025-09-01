@@ -7,6 +7,11 @@ export async function POST(req: Request, res: Response) {
   const body = await req.json();
 
   try {
+    if(!body.email || !body.name || !body.password){
+      return NextResponse.json({
+        msg: "please provide your details"
+      }, {status: 500})
+    }
     const user = await prisma.user.findFirst({
       where: {
         email: body.email,

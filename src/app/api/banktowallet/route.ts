@@ -10,6 +10,12 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
 
+    if(!body.amount){
+      return NextResponse.json({
+        msg: "please provide details"
+      }, {status: 500})
+    }
+
     const wallet = await prisma.wallet.findUnique({
       where: {
         userId: session.user.id,
@@ -75,7 +81,15 @@ export async function POST(req: Request) {
       },
     });
 
-    //update wallet balance here
+    await prisma.wallet.update({
+      where: {
+        userId: wallet?.userId
+      }, data: {
+        balance: {
+          increment: body.amount
+        }
+      }
+    })
 
     return NextResponse.json({
       msg: "transaction successfull",

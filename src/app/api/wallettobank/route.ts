@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/next-auth-config";
 import { prisma } from "@/lib/prisma-config";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -53,29 +54,65 @@ export async function POST(req: Request) {
       );
     }
 
-    const result = await prisma.$transaction([
-      prisma.wallet.update({
-        where: {
-          id: wallet!.id,
-        },
-        data: {
-          balance: {
-            decrement: body.amount,
-          },
-        },
-      }),
+    const offRamp = await prisma.offRampTxn.create({
+      data: {
+        amount: body.amount,
+        status: "Pending",
+        userId: user.id,
+        walletId: wallet!.id
+      }
+    })
 
-      prisma.bank.update({
+    const res = await axios.post(`http://localhost:3000/api/provider/wallettobank`, {
+      userId: String(user.id),
+      amount: Number(body.amount)
+    })
+
+    if(res.status === 404 || res.status === 500){
+      await prisma.offRampTxn.update({
         where: {
-          userId: user.id,
-        },
-        data: {
-          balance: {
-            increment: body.amount,
-          },
-        },
-      }),
-    ]);
+          id: offRamp.id
+        }, data: {
+          status: "Failed"
+        }
+      })
+
+      return NextResponse.json({
+        msg: "transaction failed please try again"
+      }, {status: 500})
+    }
+
+    if(res.status !== 200 && res.status !== 500 && res.status !== 404){
+      await prisma.offRampTxn.update({
+        where: {
+          id: offRamp.id
+        }, data: {
+          status: "Processing"
+        }
+      })
+
+      return NextResponse.json({
+        msg: "we are trying to complete your transaction"
+      })
+    }
+
+    await prisma.wallet.update({
+      where: {
+        id: wallet?.id
+      }, data : {
+        balance: {
+          decrement: body.amount
+        }
+      }
+    })
+
+    const result = await prisma.offRampTxn.update({
+      where: {
+        id: offRamp.id
+      }, data: {
+        status: "Success"
+      }
+    })
 
     if (!result) {
       return NextResponse.json(
