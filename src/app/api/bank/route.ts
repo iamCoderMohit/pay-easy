@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 
-export async function POST(req: Request){
+export async function POST(){
     const session = await getServerSession(authOptions)
     try {
         if(!session?.user?.email){
@@ -22,6 +22,19 @@ export async function POST(req: Request){
                 error: "user not found"
             }, {status: 500})
         }
+
+        const existingBankAc = await prisma.bank.findUnique({
+            where: {
+                userId: session.user.id
+            }
+        })
+
+        if(existingBankAc){
+            return NextResponse.json({
+                bankAc: existingBankAc
+            })
+        }
+
         const bankAc = await prisma.bank.create({
             data: {
                 userId: user.id,

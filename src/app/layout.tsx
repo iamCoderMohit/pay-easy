@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Provider } from "@/provider";
-import "./globals.css"
+import { InfoProvider } from "@/provider";
+import "./globals.css";
+
+//check if the user has any wallet existing then return that only
 
 export const metadata: Metadata = {
   title: "PayEasy",
@@ -14,11 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-      >
-        <Provider>
-        {children}
-        </Provider>
+      <body>
+        <InfoProvider>{children}</InfoProvider>
       </body>
     </html>
   );

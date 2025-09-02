@@ -24,10 +24,22 @@ export async function POST() {
       }, {status: 500});
     }
 
+    const walletExist = await prisma.wallet.findUnique({
+      where: {
+        userId: user.id
+      }, select: {balance: true}
+    })
+
+    if(walletExist){
+      return NextResponse.json({
+        wallet: walletExist
+      })
+    }
+
     const wallet = await prisma.wallet.create({
       data: {
         userId: session.user.id,
-      },
+      }, select: {balance: true}
     });
 
     return NextResponse.json({
@@ -40,3 +52,6 @@ export async function POST() {
     }, {status: 500});
   }
 }
+
+
+//complete the txncomp then proceed
