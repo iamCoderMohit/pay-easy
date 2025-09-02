@@ -2,28 +2,32 @@
 
 import { Background } from "@/components/Background"
 import Toast from "@/components/Toast"
+import { useAuth } from "@/hooks/useAuth"
 import axios from "axios"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { IoMdCheckmark, IoMdWarning } from "react-icons/io"
 
 function page() {
     const BACKEND_URL = process.env.BACKEND_URL
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
+    const [toast, setToast] = useState(false)
+    const router = useRouter()
 
-    console.log(BACKEND_URL)
+    const {signUp, loading, error} = useAuth()
 
     async function handleSignUp() {
-        try {
-            const res = await axios.post(`/api/auth/signup`, {email, name, password})
-        } catch (error) {
-            //add toast and make signup and login page working
-        }
+        await signUp(email, name, password)
+        setToast(true)
     }
+
+    
   return (
     <div className="border border-gray-700">
-        {/* <Toast /> */}
+        {toast ? <Toast text={error ? error : "successfully signed in"} setToast={setToast} icon={error ? <IoMdWarning /> : <IoMdCheckmark />} /> : null}
         <Background />
         <Link href={'/'}><img src='/images/logo.png' alt="" className="w-30 left-50 invert cursor-pointer absolute z-10" /></Link>
         <div className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 border border-gray-700 p-10 rounded-md backdrop-blur-sm flex flex-col">
@@ -48,6 +52,7 @@ function page() {
             </div>
             <button className="bg-blue-600 rounded-md w-full mt-5 py-3 cursor-pointer"
             onClick={handleSignUp}
+            disabled={loading ? true : false}
             >Sign up</button>
 
             <div className="w-full h-0.5 bg-white relative flex justify-center items-center mt-5">
