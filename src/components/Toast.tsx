@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 interface toastProps{
-  text: string,
+  text: string | null,
   icon: ReactElement,
   setToast: React.Dispatch<React.SetStateAction<boolean>>
 }

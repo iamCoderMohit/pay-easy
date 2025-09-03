@@ -11,6 +11,16 @@ export async function GET() {
       where: {
         userId: session.user.id,
       },
+      include: {
+        user: {
+          select: {
+            name: true,
+            number: true,
+            image: true,
+            email: true
+          }
+        }
+      }
     });
 
     return NextResponse.json({

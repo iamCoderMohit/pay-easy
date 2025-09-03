@@ -32,7 +32,9 @@ function Sidebar() {
             Activate Bank
           </span>
         </div>
-        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center">
+        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
+        onClick={() => router.push('/editdetails')}
+        >
           <div className="text-xl">
             <MdEdit />
           </div>
@@ -40,7 +42,9 @@ function Sidebar() {
             Edit Details
           </span>
         </div>
-        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center">
+        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
+        onClick={() => router.push('/addmoney')}
+        >
           <div className="text-xl">
             <FaMoneyCheckAlt />
           </div>
@@ -48,7 +52,9 @@ function Sidebar() {
             Add Money
           </span>
         </div>
-        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center">
+        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
+        onClick={() => router.push('/p2p')}
+        >
           <div className="text-xl">
             <BiTransfer />
           </div>

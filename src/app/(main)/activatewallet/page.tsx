@@ -102,19 +102,29 @@ function Page() {
             </div>
           </div>
         )}
+        <hr className="text-white" />
+        <h1 className="text-white font-bold">Credits to wallet</h1>
 
         {credit && (
-          <div>
+          <div className="flex gap-2 flex-col h-[50%] overflow-auto">
             {credit.map((txn: any, i: number) => (
-              <TxnComp key={i} />
+              <TxnComp
+                amount={txn.amount}
+                status={txn.status}
+                email={txn.user.email}
+                number={txn.user.number}
+                key={i}
+              />
             ))}
           </div>
         )}
+        <hr className="text-white" />
+        <h1 className="text-white font-bold">Debits from wallet</h1>
 
         {debit && (
           <div>
             {debit.map((txn: any, i: number) => (
-              <TxnComp key={i} />
+              <TxnComp key={i} amount={txn.amount} email={txn.user.email} number={txn.user.number} status={txn.status}/>
             ))}
           </div>
         )}

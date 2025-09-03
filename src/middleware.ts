@@ -79,3 +79,7 @@ export const config = {
   runtime: 'nodejs',
   matcher: ['/api/banktowallet', '/api/user', '/api/wallettobank', '/api/peertopeer', '/api/gettxns/credit', '/api/gettxns/debit', '/api/me/bankbalance', '/api/me/walletbalance']
 }
+
+
+//while editing the user it isnt checking if user is logged in or not 
+//complete the p2p create a custom hook there

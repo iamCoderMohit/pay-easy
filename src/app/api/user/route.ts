@@ -31,6 +31,10 @@ export async function PUT(req: Request) {
         number: body.number,
         pin: body.pin,
       },
+      select: {
+        number: true,
+        pin: true
+      }
     });
 
     return NextResponse.json({

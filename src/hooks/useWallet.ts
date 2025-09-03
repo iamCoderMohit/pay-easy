@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux"
 
 export function useWallet(){
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
+    const [error, setError] = useState<string | null>("")
     const dispatch = useDispatch()
 
     const activateWallet = async () => {
@@ -22,8 +22,21 @@ export function useWallet(){
         }
     }
 
+    const walletToBank = async (amount: number, pin: string) => {
+        try {
+            setLoading(true)
+            setError(null)
+            const res = await axios.post('/api/wallettobank', {amount, pin})
+        } catch (error) {
+            setError("check inputs")
+        } finally{
+            setLoading(false)
+        }
+    }
+
     return {
         activateWallet,
+        walletToBank,
         loading,
         error
     }

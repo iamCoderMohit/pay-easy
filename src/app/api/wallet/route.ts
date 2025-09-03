@@ -52,6 +52,3 @@ export async function POST() {
     }, {status: 500});
   }
 }
-
-
-//complete the txncomp then proceed
