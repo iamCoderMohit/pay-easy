@@ -29,9 +29,9 @@ function Page() {
   }
 
   return (
-    <div className="flex gap-5">
+    <div className="flex md:flex-row flex-col items-center gap-5">
         {toast ? <Toast text={error || txnerror || infoError ? error || txnerror || infoError : "success"} icon={error || txnerror || infoError ? <IoIosWarning /> : <FaCheck />} setToast={setToast} /> : null}
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
+      <div className="md:w-1/2 w-full h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
         <h1 className="text-white text-xl font-bold">Add money to wallet</h1>
         <div className="text-green-700 mt-5">
           <h1>currently there are three ways to add money to your wallet</h1>
@@ -51,7 +51,7 @@ function Page() {
           </button>
         </div>
       </div>
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
+      <div className="md:w-1/2 w-full h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
         <h1 className="text-white text-xl font-bold">Add money to Bank</h1>
         <div className="text-green-700 mt-5">
           <h1>You can transfer money to your bank via YOUR wallet only</h1>

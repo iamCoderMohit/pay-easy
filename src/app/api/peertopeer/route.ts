@@ -1,3 +1,4 @@
+import { validator } from "@/lib/auth-utils";
 import { authOptions } from "@/lib/next-auth-config";
 import { prisma } from "@/lib/prisma-config";
 import { getServerSession } from "next-auth";
@@ -5,6 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
+    await validator()
     const body = await req.json();
     const session = await getServerSession(authOptions);
 

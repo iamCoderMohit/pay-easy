@@ -32,11 +32,11 @@ function page() {
         }
     }
   return (
-    <div className="border border-gray-700">
+    <div className="border border-gray-700 ">
         <Background />
         {toast ? <Toast text={error ? error : "success"} icon={error ? <IoMdWarning /> : <IoMdCheckmark /> }setToast={setToast} /> : null}
         <Link href={'/'}><img src='/images/logo.png' alt="" className="w-30 left-50 invert cursor-pointer absolute z-10" /></Link>
-        <div className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 border border-gray-700 p-10 rounded-md backdrop-blur-sm flex flex-col">
+        <div className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/4 border border-gray-700 p-10 rounded-md backdrop-blur-sm flex flex-col">
         <h1 className="mb-5 font-semibold text-2xl">Sign in to your account</h1>
             <div className="flex flex-col">
                 <label htmlFor="" className="text-lg">Email</label>

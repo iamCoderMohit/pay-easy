@@ -6,7 +6,7 @@ const userSlice = createSlice({
         isPinSet: false,
         isNumberSet: false,
         number: 0,
-        pin: 0
+        pin: 0,
     },
     reducers: {
         setUserInfo: (state, action) => {

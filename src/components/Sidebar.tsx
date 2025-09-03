@@ -10,8 +10,8 @@ import { MdEdit } from "react-icons/md";
 function Sidebar() {
   const router = useRouter()
   return (
-    <div className="w-[5%] bg-gray-950/30 h-[90%] rounded-md absolute hover:w-[15%] backdrop-blur-xl transition-all bottom-5 text-white flex items-center flex-col justify-around group">
-      <div className="flex flex-col gap-5 w-full items-center">
+    <div className="md:w-[5%] flex-row justify-center w-screen top-0 md:top-15 fixed h-fit bg-gray-950/30 md:h-[90%] rounded-md md:absolute hover:w-[15%] backdrop-blur-xl transition-all bottom-5 text-white flex items-center md:flex-col md:justify-around group z-40">
+      <div className="flex md:flex-col gap-5 h-fit w-full items-center">
         <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
         onClick={() => router.push('/activatewallet')}
         >
@@ -62,7 +62,9 @@ function Sidebar() {
             P2P Transfer
           </span>
         </div>
-        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center">
+        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
+        onClick={() => router.push('/checkBalance')}
+        >
           <div className="text-xl">
             <FaDollarSign />
           </div>
@@ -73,7 +75,9 @@ function Sidebar() {
 
       </div>
 
-        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center">
+        <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
+        onClick={() => router.push('/profile')}
+        >
           <div className="text-xl">
             <FaCircleUser />
           </div>

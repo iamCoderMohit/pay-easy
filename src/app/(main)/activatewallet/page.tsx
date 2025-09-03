@@ -39,7 +39,7 @@ function Page() {
   }, []);
 
   return (
-    <div className="flex gap-5">
+    <div className="flex md:flex-row flex-col items-center gap-5">
       {toast ? (
         <Toast
           text={error || txnerror ? error || txnerror : "Success"}
@@ -47,7 +47,7 @@ function Page() {
           setToast={setToast}
         />
       ) : null}
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative z-0">
+      <div className="md:w-1/2 w-full md:h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative z-0">
         <h1 className="text-2xl font-bold text-white">
           {walletEnabled
             ? "Your wallet"
@@ -89,7 +89,7 @@ function Page() {
           </div>
         )}
       </div>
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
+      <div className="md:w-1/2 w-full h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
         <h1 className="text-2xl font-bold text-white">Recent transactions</h1>
 
         {credit.length === 0 && debit.length === 0 && (
@@ -106,7 +106,7 @@ function Page() {
         <h1 className="text-white font-bold">Credits to wallet</h1>
 
         {credit && (
-          <div className="flex gap-2 flex-col h-[50%] overflow-auto">
+          <div className="flex gap-2 flex-col h-[40%] overflow-auto">
             {credit.map((txn: any, i: number) => (
               <TxnComp
                 amount={txn.amount}
@@ -122,7 +122,7 @@ function Page() {
         <h1 className="text-white font-bold">Debits from wallet</h1>
 
         {debit && (
-          <div>
+          <div className="flex gap-2 flex-col h-[40%] overflow-auto">
             {debit.map((txn: any, i: number) => (
               <TxnComp key={i} amount={txn.amount} email={txn.user.email} number={txn.user.number} status={txn.status}/>
             ))}

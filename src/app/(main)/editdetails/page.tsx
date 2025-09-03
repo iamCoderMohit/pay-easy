@@ -25,7 +25,7 @@ function Page() {
   }
 
   return (
-    <div className="flex gap-5">
+    <div className="flex md:flex-row flex-col items-center gap-5">
       {toast ? (
         <Toast
           text={infoError ? infoError : "Success"}
@@ -33,7 +33,7 @@ function Page() {
           setToast={setToast}
         />
       ) : null}
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
+      <div className="md:w-1/2 w-full h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
         <h1 className="text-white text-xl font-bold">Edit Details</h1>
 
         {isNumberSet && isPinSet && (
@@ -66,7 +66,7 @@ function Page() {
           </div>
         </div>
       </div>
-      <div className="w-1/2 h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
+      <div className="md:w-1/2 w-full h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative">
       <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2">
         <WorkOnProgress />
         <h1 className="text-white font-bold">We're working on this page <br />Site is still under construction</h1>

@@ -9,7 +9,7 @@ export default function mainLayout({
 }>){
     return <div>
       <HomeBg showRadialGradient={true}>
-        <div className="grid grid-cols-[5%_auto] grid-rows-[10%_auto]  h-screen">
+        <div className="grid grid-cols-[5%_auto] grid-rows-[10%_auto]  min-h-screen">
           <div className="col-span-2">
             <Navbar />
           </div>
@@ -18,7 +18,7 @@ export default function mainLayout({
             <Sidebar />
           </div>
 
-          <div className="p-4 mx-40">
+          <div className="md:p-4 mx-0 md:mx-40 md:pr-0">
             {children}
           </div>
         </div>

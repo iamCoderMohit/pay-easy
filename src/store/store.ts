@@ -6,6 +6,7 @@ import walletReducer from "../features/walletSlice"
 import txnReducer from "../features/txnSlice"
 import bankReducer from "../features/bankSlice"
 import userReducer from "../features/userSlice"
+import demoReducer from "../features/demoSlice"
 
 const createNoopStorage = () => {
   return {
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
     wallet: walletReducer,
     txn: txnReducer,
     bank: bankReducer,
-    user: userReducer
+    user: userReducer,
+    demo: demoReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

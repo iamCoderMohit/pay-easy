@@ -1,3 +1,4 @@
+import { validator } from "@/lib/auth-utils";
 import { authOptions } from "@/lib/next-auth-config";
 import { prisma } from "@/lib/prisma-config";
 import { getServerSession } from "next-auth";
@@ -7,6 +8,7 @@ export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   const body = await req.json();
   try {
+    await validator()
     if (!body.number || !body.pin) {
       return NextResponse.json(
         {
