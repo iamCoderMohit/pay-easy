@@ -4,6 +4,7 @@ import Spinner from "@/components/Spinner";
 import Toast from "@/components/Toast";
 import TxnComp from "@/components/TxnComp";
 import { useBank } from "@/hooks/useBank";
+import { useInfo } from "@/hooks/useInfo";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
@@ -18,9 +19,11 @@ function Page() {
   const credit = useSelector((state: any) => state.txn.credit);
   const debit = useSelector((state: any) => state.txn.debit);
   const router = useRouter()
+  const {getBankBal, infoLoading} = useInfo()
 
   async function handleActivate() {
     await activateBank();
+    await getBankBal()
     setToast(true);
   }
   return (
@@ -44,7 +47,7 @@ function Page() {
             onClick={handleActivate}
           >
             <p>Activate Bank</p>
-            {bankloading ? <Spinner /> : null}
+            {bankloading || infoLoading ? <Spinner /> : null}
           </div>
         )}
 

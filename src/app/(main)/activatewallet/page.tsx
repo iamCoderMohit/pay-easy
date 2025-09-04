@@ -3,6 +3,7 @@
 import Spinner from "@/components/Spinner";
 import Toast from "@/components/Toast";
 import TxnComp from "@/components/TxnComp";
+import { useInfo } from "@/hooks/useInfo";
 import { useTxns } from "@/hooks/useTxns";
 import { useWallet } from "@/hooks/useWallet";
 import { useRouter } from "next/navigation";
@@ -20,11 +21,13 @@ function Page() {
   const credit = useSelector((state: any) => state.txn.credit);
   const debit = useSelector((state: any) => state.txn.debit);
   const bankEnabled = useSelector((state: any) => state.bank.bankEnabled);
+  const {getWalletBal, infoLoading} = useInfo()
 
   const router = useRouter();
 
   async function handleActivate() {
     await activateWallet();
+    await getWalletBal()
     setToast(true);
   }
 
@@ -47,7 +50,7 @@ function Page() {
           setToast={setToast}
         />
       ) : null}
-      <div className="md:w-1/2 w-full md:h-[80vh] rounded-2xl p-5 bg-gray-950/50 relative z-0">
+      <div className="md:w-1/2 w-full md:h-[80vh] h-[50vh] rounded-2xl p-5 bg-gray-950/50 relative z-0">
         <h1 className="text-2xl font-bold text-white">
           {walletEnabled
             ? "Your wallet"
@@ -59,7 +62,7 @@ function Page() {
             onClick={handleActivate}
           >
             <p>Activate Wallet</p>
-            {loading ? <Spinner /> : null}
+            {loading || infoLoading ? <Spinner /> : null}
           </div>
         )}
 
@@ -79,7 +82,7 @@ function Page() {
                   may face issues in future
                 </h1>
                 <div
-                  className="bg-blue-600 px-5 rounded-md text-lg text-white font-semibold cursor-pointer py-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-2"
+                  className="bg-blue-600 px-5 rounded-md text-lg text-white font-semibold cursor-pointer py-3 absolute md:bottom-1/2 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-2"
                   onClick={() => router.push("/activatebank")}
                 >
                   <p>Activate Bank</p>

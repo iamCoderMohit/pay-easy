@@ -12,7 +12,7 @@ export default function Navbar() {
   const [phone, setPhone] = useState(false);
 
   return (
-    <div className="z-10 py-5 top-0 md:fixed text-white flex items-center justify-around md:w-full  text-lg">
+    <div className="z-10 py-5 top-0 md:fixed text-white flex items-center justify-around md:w-full md:mt-0 mt-20 mb-80 text-lg">
       <Link href={"/"} className="cursor-pointer">
         <img
           src="/images/logo.png"
@@ -27,15 +27,15 @@ export default function Navbar() {
       </div>
 
       {phone && (
-        <div className="md:hidden absolute w-full bg-gray-900 z-20 backdrop-blur-2xl rounded-md top-15 flex flex-col gap-5 items-center">
+        <div className="md:hidden absolute w-full bg-gray-900 z-20 backdrop-blur-2xl rounded-md top-15 flex flex-col gap-5 items-center mt-10">
           <div>
             <div className="absolute top-4 right-5 cursor-pointer"
             onClick={() => setPhone(false)}
             ><ImCross /> </div>
             {session.data?.user ? (
-              <button onClick={() => (signOut(), persistor.purge())} className="cursor-pointer">
+              <div onClick={() => (signOut(), persistor.purge())} className="cursor-pointer">
                 Logout
-              </button>
+              </div>
             ) : (
               <Link href={"/signin"}>Signin</Link>
             )}  

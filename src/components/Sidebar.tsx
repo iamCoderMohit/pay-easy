@@ -10,7 +10,7 @@ import { MdEdit } from "react-icons/md";
 function Sidebar() {
   const router = useRouter()
   return (
-    <div className="md:w-[5%] flex-row justify-center w-screen top-0 md:top-15 fixed h-fit bg-gray-950/30 md:h-[90%] rounded-md md:absolute hover:w-[15%] backdrop-blur-xl transition-all bottom-5 text-white flex items-center md:flex-col md:justify-around group z-40">
+    <div className="md:w-[5%] flex-row  w-screen top-0 md:top-15 fixed h-20 mb-20 bg-gray-950/30 md:h-[90%] rounded-md md:absolute hover:w-[15%] backdrop-blur-xl transition-all bottom-5 text-white flex items-center md:px-0 px-10 md:flex-col md:justify-around group z-40">
       <div className="flex md:flex-col gap-5 h-fit w-full items-center">
         <div className="flex items-center transition-all duration-300 overflow-hidden w-full cursor-pointer justify-center"
         onClick={() => router.push('/activatewallet')}
@@ -90,9 +90,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-        // <CiBank />
-        // <MdEdit />
-        // <FaMoneyCheckAlt />
-        // <BiTransfer />
-        // <FaDollarSign />

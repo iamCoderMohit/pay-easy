@@ -91,7 +91,7 @@ function Page() {
           No friends? we understand; try sending money to demo users
         </h1>
 
-        <div className="flex flex-col justify-center items-center gap-10 mt-5">
+        <div className="flex flex-col justify-center items-center gap-10 mt-5 ">
           {demoUsers.map((item: any) => (
             <DemoUser name={item.name} number={item.number} balance={item.wallet?.balance} />
           ))}

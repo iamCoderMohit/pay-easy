@@ -4,6 +4,7 @@ import { Background } from "@/components/Background"
 import Spinner from "@/components/Spinner"
 import Toast from "@/components/Toast"
 import { useAuth } from "@/hooks/useAuth"
+import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -61,7 +62,9 @@ function page() {
                 <h1 className="absolute text-center bg-black bg-opacity-0 px-3">OR</h1>
             </div>
 
-            <div className="flex items-center gap-3 mt-8 mx-auto cursor-pointer">
+            <div className="flex items-center gap-3 mt-8 mx-auto cursor-pointer"
+            onClick={() => signIn("google", {callbackUrl: '/home'})}
+            >
                 <img src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" className="w-7" alt="" />
                 <h1>Sign in with Google</h1>
             </div>
