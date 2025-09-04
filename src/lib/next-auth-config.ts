@@ -47,7 +47,7 @@ export const authOptions = {
           console.error(error);
           return null;
         }
-      },
+      },  
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
