@@ -5,12 +5,12 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (!publicPaths.includes(pathname)) {
-    const token = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("token")?.value;
+    const token = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
     if (!token) {
       return NextResponse.redirect(new URL("/signin", req.url));
     }
   }
-  
+  return NextResponse.next()
 }
 
 export const config = {
