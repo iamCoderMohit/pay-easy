@@ -1,5 +1,6 @@
 "use client";
 
+import { persistor } from "@/store/store";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -32,7 +33,7 @@ export default function Navbar() {
             onClick={() => setPhone(false)}
             ><ImCross /> </div>
             {session.data?.user ? (
-              <button onClick={() => signOut()} className="cursor-pointer">
+              <button onClick={() => (signOut(), persistor.purge())} className="cursor-pointer">
                 Logout
               </button>
             ) : (

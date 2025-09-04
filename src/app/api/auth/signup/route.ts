@@ -46,5 +46,3 @@ export async function POST(req: Request) {
     })
   }
 }
-
-//was trying to access using postman

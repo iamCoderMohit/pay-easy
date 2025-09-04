@@ -1,10 +1,10 @@
 "use client"
 
 import { Background } from "@/components/Background"
+import Spinner from "@/components/Spinner"
 import Toast from "@/components/Toast"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { IoMdCheckmark, IoMdWarning } from "react-icons/io"
@@ -14,16 +14,18 @@ function page() {
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
     const [toast, setToast] = useState(false)
-    const searchParams = useSearchParams()
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = async () => {
+        setLoading(true)
         const res = await signIn("credentials", {
             redirect: false,
             email,
             password,
         })
         setToast(true)
+        setLoading(false)
 
         if(res?.error){
             setError("wrong details")
@@ -50,9 +52,12 @@ function page() {
                 onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <button className="bg-blue-600 rounded-md w-full mt-5 py-3 cursor-pointer"
+            <button className="bg-blue-600 rounded-md w-full mt-5 py-3 cursor-pointer flex items-center justify-center gap-3"
             onClick={handleSubmit}
-            >Sign in</button>
+            >
+                <p>Sign in</p>
+                {loading ? <Spinner /> : null}
+            </button>
 
             <div className="w-full h-0.5 bg-white relative flex justify-center items-center mt-5">
                 <h1 className="absolute text-center bg-black bg-opacity-0 px-3">OR</h1>

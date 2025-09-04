@@ -73,7 +73,7 @@ function Page() {
         {credit.length === 0 && debit.length === 0 && <div>
           <h1 className="text-white text-lg text-center mt-20">No transactions found</h1>
           <div
-                  className="bg-blue-600 px-5 rounded-md text-lg text-white font-semibold cursor-pointer py-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bottom-0 flex items-center justify-center gap-2"
+                  className="bg-blue-600 px-5 rounded-md text-lg text-white font-semibold cursor-pointer py-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  flex items-center justify-center gap-2"
                 >
                   <p>Initiate One</p>
                 </div>
